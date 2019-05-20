@@ -1,0 +1,19 @@
+{
+  "name": "TutorialBot",
+  "version": "1.0.0",
+  "description": "Tutorial Bot and Template made for Glitch",
+  "main": "node server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "8.4.0"
+  },
+  "author": "Mintical",
+  "license": "MIT",
+  "homepage": "https://discord.gg/g5QjTSR",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "fs": "^0.0.2"
+  }
+}
