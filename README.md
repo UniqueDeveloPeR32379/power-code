@@ -1,54 +1,51 @@
-Discord.js Template
+Discord.js bot - [expoBot](https://discordapp.com/api/oauth2/authorize?client_id=464747957288435732&permissions=8&scope=bot)
 ===================
+Site: [expobot.glitch.me](https://expobot.glitch.me)
+------------------
+Made by [jarvis](https://vk.com/tarnatovski)
+-------------------
+Hosting on [Glitch](https://glitch.com)
+-------------------
 
-Came here for a discord bot template? Perfect, this is just for you! The discord bot is coded in javascript and:
 
-- Has a fully functional command handler
 
-- Status such as `Playing With Friends`
+Commands: 
+* help - *Shows help*
+* prefix - *Shows server's prefix*
+* settings - *Shows server's settings*
+* ping - *Pong!*
+* reload - *Reloads commands*
+* ascii - *Ascii-art*
+* messages - *Shows the number of your messages*
+* leaderboards - *Shows leaders of messages*
+* stats - *Server's and bot's statistics*
+* poll - *Creates a simple poll with timed ending*
+* mpoll - *Creates a poll with multi-answers and with timed ending*
+* pool - *Creates a pool, where users can add answers by themselves*
+* play - *Play some music*
+* pause - *Pause music, wtf*
+* resume - *Same thing*
+* search - *Searches music (integrated with 'play' command)*
+* dj - *Shows DJ settings*
+* skip - *Creates a poll to skip a music*
+* forceskip - *Skips music*
+* queue - *Music queue*
+* stop - *Slightly stops music*
+* leave - *Let bot leave music channel*
+* join - *Let bot join music channel*
+* clear - *Clear music queue*
+* volume - *Ajust volume*
+* calc - *Calculates something*
+* google - *Searches something*
+* bf4 - *Shows stats of a BF4 player*
+* 8ball - *Ask 8ball*
+* dice - *Roll a dice*
+* weather - *Shows a weather of a provided city*
 
-- A ping command to get you started!
+Extra commands:
+* #!reset-prefix - *slightly resets prefix to '#'*
 
-botconfig.json
---------------
+\ ゜o゜)ノ
 
-Over here, this is where we'll be storing all of our colors and our prefix. All of this is fully customizable, and you can change it however you want. 
-
-server.js
----------
-
-This is your main JavaScript file and where your main code will be. This is how your discord bot will come alive!
-
-watch.json
-----------
-
-Do not touch this file. This is what's preventing your discord bot from refreshing every single time you type something. Mmk?
-
-Commands Folder
----------------
-
-This is where all your commands will be made and used. To make a new command, make a new file called `commands/Command-Name.js`. Then insert this into your file:
-
-```
-module.exports.run = async (bot, message, args) => {
-
-}
-
-module.exports.help = {
-  name: "Command Name"
-}
-```
-
-Special Note from Mintical
---------------------------
-
-Do not show you Bot Token publicly in your `server.js`. Instead, go to your `.env` file and make a new variable called `TOKEN` and make it equal your token. Then, in your `server.js` file, you can access it using `process.env.TOKEN`.
-
-Social Medias and Support
-=========================
-
-- Join my [Discord Server](https://discord.gg/aHcRGSW)!
-
-- Follow me on [Twitter](https://twitter.com/MinticalGames)
-
-- Subscribe to me on [YouTube](https://www.youtube.com/channel/UCxwURBC4iwn9QsnvhW-FUmA)
+*(and some more features >_<)*
+-

@@ -1,17 +1,22 @@
-module.exports.run = async (bot, message, args) => {
+var fs = require('fs'); //FileSystem
+let config = JSON.parse(fs.readFileSync("./config.json", "utf8")); //Config file
+const Discord = require("discord.js");
 
-//console.log(args[0]);// user
-//console.log(args[1]);// role
-//console.log(args[2]);//time
+exports.run = (client, message, args) => {
 
-message.delete();
+  if (args.length == 0) return message.channel.send({
+    embed: {
+      "description": "Enter message",
+      "color": 0xff2222,
+      "title": "Error"
+    }
+  });
+  
+  message.channel.send({
+    embed: {
+      "description": args.join(" "),
+      "color": 0xffffff
+    }
+  });
 
-if(!args.join(" ")){
-  return message.channel.send(":x: " + "| Please Enter Something For The Bot To Say")
-}
-message.channel.send(args.join(" "));
-}
-
-module.exports.help = {
-    name: "say"
 }

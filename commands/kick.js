@@ -1,33 +1,57 @@
-module.exports.run = async (bot, message, args) => {
-  
-  // !restart
-  exports.run = (client, message, args) => {
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+const Discord = require('discord.js');
+var utils = require('bot-utils');
+var fs = require('fs'); //FileSystem
+let conf = JSON.parse(fs.readFileSync("./config.json", "utf8")); //Config file
 
-    if(!message.member.hasPermission("KICK_MEMBERS")){
-        message.channel.send("You don't have the permissions to use this command!");
+exports.run = async (client, message, args, ops) => {
+
+  let BReasons = [
+    "I'm sorry, friend, but someone's stray hand today",
+    "From the heart",
+    "Just because",
+    "Kick, haha",
+    "You asked for it",
+    "Just kick"
+  ];
+
+  if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send({
+    embed: {
+      "description": "Denied!",
+      "color": 0xff2222,
+      "title": "Error"
     }
-    else{
-        
-        if(!member)
-            //you have to type !kick then @username#1234 as an example
-            return message.channel.send("Please mention a valid member of this server");
-        if(!member.kickable) 
-            return message.channel.send("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
-
-        // slice(1) removes the first part, which here should be the user mention or ID
-        // join(' ') takes all the various parts to make it a single string.
-        let reason = args.slice(1).join(' ');
-        if(!reason) 
-            reason = "No reason provided";
-        member.kick(reason)
-            .catch(error => message.channel.send(`Sorry ${message.author} I couldn't kick because of : ${error}`));
-            message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
+  }).then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
     }
-}
-  
-}
+  });
 
-module.exports.help = {
-  name: "kick"
+  let BMember = message.mentions.members.first();
+  let BReason = args.slice(1).join(" ");
+  if (!BReason) {
+    BReason = BReasons[Math.floor(Math.random() * BReasons.length)];
+  }
+  if (!BMember) return message.reply("please, mention user, or i'll *pf,fy. dct[ yf[eq!*").then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
+    }
+  });
+  if (BMember.id == 550238098617794570 )return message.reply("are you Mad,I gonna Not kick Myself,thanks?").then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
+    }
+  });
+  if (!BMember.kickable) return message.reply("he is too dangerous >_<").then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
+    }
+  });
+
+  var embed = new Discord.RichEmbed()
+    .setColor(0xFF2222)
+    .setTitle("KICK")
+    .setDescription(`🔨 ${BMember.user.tag} kicked for reason \n**${BReason}**`);
+  BMember.kick(BReason).catch(error => message.reply(`Да что за день то такой сегодня! Не смог забанить ${message.author}, хз почему, но может быть из-за: \n` + "```" + error + "```"));
+  message.channel.send(embed);
+  BMember.send(embed);
 }

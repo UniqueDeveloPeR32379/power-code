@@ -1,30 +1,59 @@
-module.exports.run = async (bot, message, args) => {
-  
-  // !restart
-  exports.run = (client, message, args) => {
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+const Discord = require('discord.js');
+var utils = require('bot-utils');
+var fs = require('fs'); //FileSystem
+let conf = JSON.parse(fs.readFileSync("./config.json", "utf8")); //Config file
 
-    if(!message.member.hasPermission("BAN_MEMBERS")){
-        message.channel.send("You don't have the permissions to use this command!");
+exports.run = async (client, message, args, ops) => {
+
+  let BReasons = [
+    "I'm sorry, friend, but someone's stray hand today",
+    "From the heart",
+    "Just because",
+    "Ban, haha",
+    "You asked for it",
+    "Just ban"
+  ];
+
+  if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send({
+    embed: {
+      "description": "Denied!",
+      "color": 0xff2222,
+      "title": "Error"
     }
-
-    else{
-        if(!member)
-            return message.channel.send("Please mention a valid member of this server");
-        if(!member.bannable) 
-            return message.channel.send("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
-
-        let reason = args.slice(1).join(' ');
-        if(!reason) reason = "No reason provided";
-
-        member.ban(reason)
-            .catch(error => message.channel.send(`Sorry ${message.author} I couldn't ban the user`));
-        message.channel.send(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+  }).then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
     }
-}
-  
-}
+  });
 
-module.exports.help = {
-  name: "ban"
+  let BMember = message.mentions.members.first();
+  let BReason = args.slice(1).join(" ");
+  if (!BReason) {
+    BReason = BReasons[Math.floor(Math.random() * BReasons.length)];
+  }
+  if (!BMember) return message.reply("please, mention user, or i'll *pf,fy. dct[ yf[eq!*").then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
+    }
+  });
+  if (BMember.id ==550238098617794570 ) return message.reply("are you Mad I gonna Not ban Myself,Thanks").then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
+    }
+  });
+  if (!BMember.bannable) return message.reply("he is too dangerous >_<").then(msg => {
+    if (conf[message.guild.id].delete == 'true') {
+      msg.delete(conf[message.guild.id].deleteTime);
+    }
+  });
+
+  var embed = new Discord.RichEmbed()
+    .setColor(0xFF2222)
+    .setTitle("B A N")
+    .setDescription(`🔨 ${BMember.user.tag} banned for reason \n**${BReason}**`);
+
+  BMember.ban(BReason).catch(error => message.reply(`\n${message.author.username},\n` + "```" + error + "```"));
+  message.channel.send(embed);
+  BMember.send(embed)
+
 }
