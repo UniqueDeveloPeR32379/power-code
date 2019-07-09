@@ -1,51 +1,31 @@
-Discord.js bot - [expoBot](https://discordapp.com/api/oauth2/authorize?client_id=464747957288435732&permissions=8&scope=bot)
-===================
-Site: [expobot.glitch.me](https://expobot.glitch.me)
-------------------
-Made by [jarvis](https://vk.com/tarnatovski)
+Welcome to Glitch
+=================
+
+Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+
+**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+
+Find out more [about Glitch](https://glitch.com/about).
+
+
+Your Project
+------------
+
+On the front-end,
+- edit `public/client.js`, `public/style.css` and `views/index.html`
+- drag in `assets`, like images or music, to add them to your project
+
+On the back-end,
+- your app starts at `server.js`
+- add frameworks and packages in `package.json`
+- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+
+This app has a database!
+- this app uses sqlite but you can power your apps with [a number of other storage options](https://glitch.com/storage)
+- `sqlite.db` is created and put into the `.data` folder, a hidden directory whose contents aren’t copied when a project is remixed. you can see the contents of `.data` in the console under "Logs"
+
+
+Made by [Glitch](https://glitch.com/)
 -------------------
-Hosting on [Glitch](https://glitch.com)
--------------------
-
-
-
-Commands: 
-* help - *Shows help*
-* prefix - *Shows server's prefix*
-* settings - *Shows server's settings*
-* ping - *Pong!*
-* reload - *Reloads commands*
-* ascii - *Ascii-art*
-* messages - *Shows the number of your messages*
-* leaderboards - *Shows leaders of messages*
-* stats - *Server's and bot's statistics*
-* poll - *Creates a simple poll with timed ending*
-* mpoll - *Creates a poll with multi-answers and with timed ending*
-* pool - *Creates a pool, where users can add answers by themselves*
-* play - *Play some music*
-* pause - *Pause music, wtf*
-* resume - *Same thing*
-* search - *Searches music (integrated with 'play' command)*
-* dj - *Shows DJ settings*
-* skip - *Creates a poll to skip a music*
-* forceskip - *Skips music*
-* queue - *Music queue*
-* stop - *Slightly stops music*
-* leave - *Let bot leave music channel*
-* join - *Let bot join music channel*
-* clear - *Clear music queue*
-* volume - *Ajust volume*
-* calc - *Calculates something*
-* google - *Searches something*
-* bf4 - *Shows stats of a BF4 player*
-* 8ball - *Ask 8ball*
-* dice - *Roll a dice*
-* weather - *Shows a weather of a provided city*
-
-Extra commands:
-* #!reset-prefix - *slightly resets prefix to '#'*
 
 \ ゜o゜)ノ
-
-*(and some more features >_<)*
--
