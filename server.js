@@ -65,7 +65,8 @@ client.on("error", e => {
 client.on('ready', () => { //Startup
   console.log("Bot on!");
 
-  client.user.setUsername("𝘗𝘖𝘞𝘌𝘙乡BOT");
+  client.user.setAvatar("https://cdn.discordapp.com/avatars/515222824001208350/1830b359bf336e34f311d678efbab8dd.webp?size=1024");
+  client.user.setUsername("XenoX");
   client.user.setStatus('online');
   client.user.setActivity(`${client.guilds.size} servers | ${client.users.size} users | p!help`, {
     type: 'WATCHING'
@@ -88,7 +89,7 @@ client.on('guildCreate', guild => { // If the Bot was added on a server, proceed
 });
   
   
-  const chan = client.channels.get("471603875749691393");
+  const chan = client.channels.get("570196133507497985");
   
   config[guild.id] = {
     prefix: 'p!',
@@ -106,20 +107,21 @@ client.on('guildCreate', guild => { // If the Bot was added on a server, proceed
   
   var welcome = new Discord.RichEmbed()
     .setColor(0x000000)
-    .setURL("https://discord.gg/")
+    .setURL("https://discord.gg/kS4WnY9")
     .setTitle("Joined " + guild.name + " | Click to join support server")
-    .setDescription("**Well, hello, I think.**\n\nMy name is expoBot, as you can see. I'm just a bot. Perfect bot. Another, same as other millions bots.\n\n")
+    .setDescription("**Well, hello, I think.**\n\nMy name is Xenox, as you can see. I'm just a bot. Perfect bot. Another, same as other millions bots.\n\n")
     .addField("Prefix", `\`#\``, false)
     .addField("Auto-delete", "true", false)
     .addField("Delete time", "10s", false)
     .addField("Default volume", "100%", false)
     .addField("Max volume", "200%", false)
     .addField("Level UP messages", "false", false)
-    .setFooter("Members: " + guild.memberCount + " | Guild: " + guild.name + " | Use #help to get help information | Official website: expobot.glitch.me");
+    .setFooter("Members: " + guild.memberCount + " | Guild: " + guild.name + " | Use #help to get help information | Official website: expobot.glitch.me")
+    .setThumbnail("https://cdn.glitch.com/e41974d3-eb04-41f8-89c1-303283d7b8bc%2Fgiphy.gif?v=1562911156061");
   
   const channel = Promise.resolve(getDefaultChannel(guild));
   channel.then(function(ch) {
-    const chan1 = client.channels.get(ch);
+    const chan1 = client.channels.get('570196133507497985');
     chan1.send(welcome);
   });
   

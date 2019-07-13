@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) => {
   let embed = new Discord.RichEmbed()
     .setColor(0xFF4500);
   
-  let owners = process.env.OWNER.split(' , ');
+  let owners = process.env.OWNER.split(',');
   
   if (!owners.includes(message.author.id))  {
     embed
