@@ -1,0 +1,80 @@
+const { MessageEmbed } = require('discord.js');
+
+exports.run = async (client, message) => {
+    
+    // Invite Channel
+    if (message.channel.id === client.managerOptions.inviteChannelID && !message.author.bot) {
+      
+      message.delete({timeout: 1000});
+      
+      // Create Embed
+      const embed = new MessageEmbed()
+        .setColor(0x7289DA)
+        .setTitle(`Hello, ${message.author.tag}`)
+      
+      // Variables
+      let args = message.content.split(/ +/g);
+      let id = args.shift();
+      let prefix = args.join(' ');
+      let alreadyInQueue = (!!(await client.botData.fetch(`${id}`)));
+      let bot = await client.users.fetch(id).catch(err => { /* Ignore Invalid IDs */ });
+      let now = new Date();
+      
+      // Error Messages
+      let error;
+      if (!bot) error = 'Sorry, a bot with that ID couldn\'t be found.';
+      else if (!prefix) error = 'Please send the prefix following the bot\'s ID.';
+      else if (!bot.bot) error = 'Sorry, that isn\'t a bot.';
+      else if (alreadyInQueue || message.guild.members.get(id)) error = 'Sorry, this bot is already in the queue or server.';
+      if (error) return message.channel.send(embed.setFooter(error)).then(i => i.delete({ timeout: 10000 })); // Send Error
+      
+      // Update Database
+      client.botData.set(`${id}`, {
+        "code": 0,
+        "prefix": prefix,
+        authorID: message.author.id,
+        invitedTimestamp: `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()} @ ${now.getHours()}:${now.getMinutes()}`
+      });
+      // Update Queue
+      let queue = await client.queue.fetch('queue') ? client.queue.push('queue', id) : client.queue.set('queue', [id]); 
+      // Modify Embed & Send
+      embed.setDescription(`Thank you for inviting **${bot.username}**! It will be added to ${client.managerOptions.mainGuildName} after it is tested.\n\nIn the meantime, please read the rules for bots by typing **\`++limits\` in #bot-testing.** \n\n Also Check **#bot-rules** For **Rules**`).setThumbnail(bot.displayAvatarURL())
+      embed.addField('View Queue','http://www.queue-xenox.ml')
+      embed.addField('Queue Position',`${client.queue.get('queue').length}`)
+      //embed.setURL("https://discordapp.com/api/oauth2/authorize?client_id=" + bot.id + "&permissions=8&scope=bot")
+      embed.setTimestamp()
+      //embed.setThubmnail("© Just9 | Xenox Development")
+      message.channel.send(embed);
+      
+      // Emit getNewInfo
+      client.io.emit('getNewInfo', true);
+      
+      // Send NotificatiNVon
+      return client.channels.get(client.managerOptions.logsChannelID).send(`(Owner: ${message.author}) **${bot.tag}** has been added to the queue. You will receive updates in this channel.`)
+      .then(sentMessage => sentMessage.react('a:emoji_29:610354823992442880'))
+    .catch(console.error)
+      
+    }
+  
+    // Check for prefix
+    if (!message.content.startsWith(client.prefix)) return;
+    
+    // Declare & Initialize Variables
+    const args = message.content.slice(client.prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+
+    // Return Statements
+    if (message.author.bot || !message.channel.guild || !message.guild) return;
+    if (!client.commands.has(cmd)) return;
+    
+    // Run Command
+    const command = client.commands.get(cmd);
+    command.exec(message, args);
+    
+}
+
+
+
+
+
+// Bum Bum

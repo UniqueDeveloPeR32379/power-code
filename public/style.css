@@ -1,0 +1,13 @@
+* {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+body {
+    background-color: #000000;
+    color: white;
+}
+
+.jumbotron {
+    background-color: #000000;
+    padding: 15px 15px 15px 15px;
+}
