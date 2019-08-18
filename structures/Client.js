@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+  const Discord = require('discord.js');
 const Hook = require('quick.hook');
 const db = require('quick.db');
 const Enmap = require('enmap')

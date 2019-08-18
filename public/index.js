@@ -5,7 +5,7 @@ let socket = io();
 let bearer = getCookie("bearer");
 let us = getCookie()
 console.log(us)
-if (!bearer) updateLoadingHTML('<a href="https://discordapp.com/api/oauth2/authorize?client_id=583910433300152331&redirect_uri=http%3A%2F%2Fxenox-dbm.glitch.me%2Fcallback&response_type=code&scope=identify"><button type="button" class="btn btn-dark">Login With Discord</button></a>')
+if (!bearer) updateLoadingHTML('<a href="https://discordapp.com/api/oauth2/authorize?client_id=583910433300152331&redirect_uri=http%3A%2F%2Fwww.queue-xenox.cf%2Fcallback&response_type=code&scope=identify"><button type="button" class="btn btn-dark">Login With Discord</button></a>')
 else socket.emit('getInfo', bearer);
 
 function updateLoadingHTML(html) {
@@ -34,7 +34,7 @@ socket.on('getNewInfo', function() {
 socket.on('getInfoWeb', function(info) {
 
   // Verify Login & Access
-  if (!info) updateLoadingHTML('<a href="https://discordapp.com/api/oauth2/authorize?client_id=583910433300152331&redirect_uri=http%3A%2F%2Fxenox-dbm.glitch.me%2Fcallback&response_type=code&scope=identify"><button type="button" class="btn btn-dark">Login With Discord</button></a>')
+  if (!info) updateLoadingHTML('<a href="https://discordapp.com/api/oauth2/authorize?client_id=583910433300152331&redirect_uri=http%3A%2F%2Fwww.queue-xenox.cf%2Fcallback&response_type=code&scope=identify"><button type="button" class="btn btn-dark">Login With Discord</button></a>')
   else if (info === 403) updateLoadingHTML('Sorry, you don\'t have access to this page...');
   else window.loading_screen.finish();
   

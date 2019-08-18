@@ -54,7 +54,10 @@ exports.run = async (client, member) => {
     owner.roles.add(member.guild.roles.find(r => r.name === 'Developer'));
     
     // Send Notification
-    client.channels.get(client.managerOptions.logsChannelID).send(`(Owner: ${owner}) **${member.user.tag}** has been added to **${client.managerOptions.mainGuildName}**. Congrats ! 🎉`);
+    client.channels.get(client.managerOptions.logsChannelID).send(`(Owner: ${owner}) **${member.user.tag}** has been added to **${client.managerOptions.mainGuildName}**.`)
+   // message.channel.send('hello world')
+    .then(sentMessage => sentMessage.react('a:emoji_32:610366326581493790'))
+    .catch(console.error) 
     
     // Emit getNewInfo
     client.io.emit('getNewInfo', true);

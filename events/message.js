@@ -39,7 +39,7 @@ exports.run = async (client, message) => {
       let queue = await client.queue.fetch('queue') ? client.queue.push('queue', id) : client.queue.set('queue', [id]); 
       // Modify Embed & Send
       embed.setDescription(`Thank you for inviting **${bot.username}**! It will be added to ${client.managerOptions.mainGuildName} after it is tested.\n\nIn the meantime, please read the rules for bots by typing **\`++limits\` in #bot-testing.** \n\n Also Check **#bot-rules** For **Rules**`).setThumbnail(bot.displayAvatarURL())
-      embed.addField('View Queue','http://www.queue-xenox.ml')
+      embed.addField('View Queue','http://www.queue-xenox.cf')
       embed.addField('Queue Position',`${client.queue.get('queue').length}`)
       //embed.setURL("https://discordapp.com/api/oauth2/authorize?client_id=" + bot.id + "&permissions=8&scope=bot")
       embed.setTimestamp()

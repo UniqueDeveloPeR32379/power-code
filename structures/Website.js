@@ -22,32 +22,14 @@ class Website {
     client.io = require('socket.io')(http);
     
     app.use(express.static('public'))
-    
-    passport.serializeUser((user, done) => {
-      done(null, user);
-    });
-
-    passport.deserializeUser((obj, done) => {
-      done(null, obj);
-    });
 
     app.get('/', function(req, res) {
       res.sendFile(__dirname + '/index.html');
     });
-
-    let ops = {
-      clientId: '583910433300152331', // This is what the input shoud look like, replace it with your own.
-      clientSecret: 'MMeSUwv1JYCy1Jk0zGETdZbjvWRPm57r', // This is what the input shoud look like, replace it with your own.
-      accessTokenUri: 'https://discordapp.com/api/oauth2/token',
-      authorizationUri: 'https://discordapp.com/api/oauth2/authorize',
-      redirectUri: 'https://xenox-dbm.glitch.me/callback', // This is what the input shoud look like, replace it with your own.
-      scopes: ['identify']
-    };
     const DStrategy = new Strategy({
         clientID: '583910433300152331',
         clientSecret: 'MMeSUwv1JYCy1Jk0zGETdZbjvWRPm57r',
-        callbackURL: 'http://xenox-dbm.glitch.me/callback',
-        redirectUri: 'https://xenox-dbm.glitch.me/callback',
+        callbackURL: 'http://www.queue-xenox.cf/callback',
         scope: ["identify"]
       },
       (accessToken, refreshToken, profile, done) => {
@@ -56,6 +38,13 @@ class Website {
       }
     )
     passport.use(DStrategy);
+    passport.serializeUser((user, done) => {
+      done(null, user);
+    });
+
+    passport.deserializeUser((obj, done) => {
+      done(null, obj);
+    });
     app.use(session({
       secret: "BCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.",
       resave: false,
@@ -71,7 +60,20 @@ class Website {
       extended: true
     }));
     let baseApiUrl = 'https://discordapp.com/api/';
-
+    app.get('/', (req, res, next) => {
+        if (req.session.backURL) {
+            req.session.backURL = req.session.backURL;
+        } else if (req.headers.referer) {
+            const parsed = url.parse(req.headers.referer);
+            if (parsed.hostname === app.locals.domain) {
+                req.session.backURL = parsed.path;
+            }
+        } else {
+            req.session.backURL = "/";
+        }
+        next();
+    },
+        passport.authenticate("discord"))
     app.get('/callback', passport.authenticate('discord', {
       failureRedirect: "/"
     }),
@@ -254,8 +256,11 @@ class Website {
           client.io.emit('getNewInfo', true);  
           
           // Send Notification
-          client.channels.get(client.managerOptions.logsChannelID).send(`(Owner: ${await client.users.fetch(bot.authorID)}) **${uBot.username}#${uBot.discriminator}** has been denied for **"${data.reason || 'No reason provided'}"**.`);
-          
+          client.channels.get(client.managerOptions.logsChannelID).send(`(Owner: ${await client.users.fetch(bot.authorID)}) **${uBot.username}#${uBot.discriminator}** has been denied for **"${data.reason || 'No reason provided'}"**.`)
+          //message.channel.send('hello world')
+        .then(sentMessage => sentMessage.react('a:emoji_32:610366304385237002'))
+       .catch(console.error) 
+            
           // Kick From Testing Guild
           try {
             client.guilds.get(client.managerOptions.testingGuildID).members.get(botID).kick();
